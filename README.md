@@ -4,12 +4,12 @@
 aws lambda create-function --function-name aws-codebuild-python-lambda \
   --runtime python3.8 \
   --handler lambda_handler \
-  --role arn:aws:iam::your-account-id:role/YourLambdaExecutionRole \
+  --role arn:aws:iam::506236563550:role/aws-codebuild-python-lambda \
   --zip-file fileb://your-lambda-deployment-package.zip
 
-aws iam create-role --role-name YourLambdaExecutionRole --assume-role-policy-document file://lambda-execution-trust-policy.json
-aws iam put-role-policy --role-name YourLambdaExecutionRole --policy-name LambdaExecutionPolicy --policy-document file://lambda-execution-policy.json
-aws iam update-assume-role-policy --role-name YourLambdaExecutionRole --policy-document file://lambda-execution-trust-policy.json
+aws iam create-role --role-name aws-codebuild-python-lambda --assume-role-policy-document file://lambda-execution-trust-policy.json
+aws iam put-role-policy --role-name aws-codebuild-python-lambda --policy-name LambdaExecutionPolicy --policy-document file://lambda-execution-policy.json
+aws iam update-assume-role-policy --role-name aws-codebuild-python-lambda --policy-document file://lambda-execution-trust-policy.json
 
 
 aws iam create-policy --policy-name AWSCodeBuild_CloudWatchLogs --policy-document file://aws_code_build_cloudwatch_logs.json

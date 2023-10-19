@@ -8,7 +8,7 @@
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:REGION:ACCOUNT_ID:log-group:/aws/lambda/YOUR_LAMBDA_FUNCTION_NAME:*"
+            "Resource": "arn:aws:logs:us-east-1:506236563550:log-group:/aws/lambda/aws-codebuild-python-lambda:*"
         }
     ]
 }
