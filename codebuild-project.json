@@ -14,6 +14,6 @@
         "computeType": "BUILD_GENERAL1_SMALL",
         "privilegedMode": true
     },
-    "serviceRole": "arn:aws:iam::YOUR_ACCOUNT_ID:role/YourCodeBuildServiceRole"
+    "serviceRole": "arn:aws:iam::506236563550:role/CodeDeployRole"
 }
 
