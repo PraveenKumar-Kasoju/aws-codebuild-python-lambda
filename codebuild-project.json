@@ -2,7 +2,7 @@
     "name": "aws-codebuild-python-lambda",
     "source": {
         "type": "GITHUB",
-        "location": "https://github.com/OmprakashPaliwal/aws-codebuild-python-lambda.git",
+        "location": "https://github.com/PraveenKumar-Kasoju/aws-codebuild-python-lambda.git",
         "buildspec": "buildspec.yml"
     },
     "artifacts": {
