@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+  pre_build:
+    commands:
+      - pip install -r requirements.txt -t build/
+  build:
+    commands:
+      - zip -r deployment-package.zip .
+  post_build:
+    commands:
+      - aws lambda update-function-code --function-name aws-codebuild-python-lambda --zip-file fileb://deployment-package.zip
+
+artifacts:
+  files: deployment-package.zip
+
