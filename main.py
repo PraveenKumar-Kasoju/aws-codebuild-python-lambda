@@ -1,37 +1,58 @@
-import pandas as pd
-import json
+class Task:
+    def __init__(self, description, completed=False):
+        self.description = description
+        self.completed = completed
 
-def lambda_handler(event, context):
-    try:
-        # Check if the 'data' field exists in the event
-        if 'data' in event:
-            # Load the JSON data from the 'data' field
-            data = json.loads(event['data'])
-            
-            # Create a Pandas DataFrame from the JSON data
-            df = pd.DataFrame(data)
-            
-            # Perform some data processing using Pandas
-            # For example, let's sum the 'value' column
-            total_sum = df['value'].sum()
-            
-            # Return the result
-            result = {
-                "total_sum": total_sum
-            }
-            
-            return {
-                'statusCode': 200,
-                'body': json.dumps(result)
-            }
+class TaskManager:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, description):
+        task = Task(description)
+        self.tasks.append(task)
+        print(f'Task "{description}" added successfully.')
+
+    def mark_completed(self, index):
+        if 0 <= index < len(self.tasks):
+            self.tasks[index].completed = True
+            print(f'Task "{self.tasks[index].description}" marked as completed.')
         else:
-            return {
-                'statusCode': 400,
-                'body': "Missing 'data' field in the event."
-            }
-    except Exception as e:
-        return {
-            'statusCode': 500,
-            'body': f"An error occurred: {str(e)}"
-        }
+            print('Invalid task index.')
 
+    def view_tasks(self):
+        if not self.tasks:
+            print('No tasks available.')
+        else:
+            print('Tasks:')
+            for i, task in enumerate(self.tasks):
+                status = 'Completed' if task.completed else 'Pending'
+                print(f'{i + 1}. {task.description} - {status}')
+
+def main():
+    task_manager = TaskManager()
+
+    while True:
+        print('\nTask Manager Menu:')
+        print('1. Add Task')
+        print('2. Mark Task as Completed')
+        print('3. View Tasks')
+        print('4. Exit')
+
+        choice = input('Enter your choice (1-4): ')
+
+        if choice == '1':
+            description = input('Enter task description: ')
+            task_manager.add_task(description)
+        elif choice == '2':
+            index = int(input('Enter task index to mark as completed: '))
+            task_manager.mark_completed(index - 1)  # Adjust index to start from 1
+        elif choice == '3':
+            task_manager.view_tasks()
+        elif choice == '4':
+            print('Exiting Task Manager. Goodbye!')
+            break
+        else:
+            print('Invalid choice. Please enter a number between 1 and 4.')
+
+if __name__ == '__main__':
+    main()
